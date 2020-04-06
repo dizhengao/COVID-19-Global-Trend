@@ -1,1 +1,1 @@
-web: python Plot_Trend-Fin-Dash.py
+web: python3 Plot_Trend-Fin-Dash.py
