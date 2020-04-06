@@ -330,8 +330,7 @@ def update_graph(cat,top,scale,start,chn,region):
     
     return fig
 
-if __name__ == '__main__':
-	app.run_server(debug=True, use_reloader=False) 
+app.run_server(debug=True, use_reloader=False) 
 
 
 
