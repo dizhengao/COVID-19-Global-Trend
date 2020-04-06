@@ -3,10 +3,6 @@
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import xlrd
-from plotly import __version__
-from plotly.offline import download_plotlyjs,init_notebook_mode,plot,iplot
 import plotly.express as px
 
 import dash
@@ -215,6 +211,9 @@ def PlotTrend_XT_InA(url = 'JHU_Git', Top = 20, Hubei = True, China = True, Star
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+server = app.server
+
 url_confirm = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
 url_death = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
     
@@ -331,7 +330,8 @@ def update_graph(cat,top,scale,start,chn,region):
     
     return fig
 
-app.run_server(debug=True, use_reloader=False) 
+if __name__ == '__main__':
+	app.run_server(debug=True, use_reloader=False) 
 
 
 
