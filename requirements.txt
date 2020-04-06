@@ -7,5 +7,5 @@ dash-core-components==0.5.0
 
 pandas
 numpy
-plotly
+
 
