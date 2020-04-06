@@ -1,1 +1,1 @@
-web: gunicorn Plot_Trend-Fin-Dash:server
+web: python Plot_Trend-Fin-Dash
