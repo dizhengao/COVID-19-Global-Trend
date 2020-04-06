@@ -23,15 +23,16 @@ bokeh==1.1.0
 boto==2.49.0
 Bottleneck==1.2.1
 cachetools==3.1.0
-certifi==2019.3.9
+certifi==2019.11.28
 cffi==1.12.3
 chardet==3.0.4
 Click==7.0
 cloudpickle==1.0.0
 clyent==1.2.2
 colorama==0.4.1
-conda==4.6.14
+conda==4.8.3
 conda-build==3.10.9
+conda-package-handling==1.6.0
 conda-verify==3.1.1
 contextlib2==0.5.5
 cryptography==2.6.1
@@ -191,7 +192,7 @@ ruamel-yaml==0.15.46
 scikit-image==0.15.0
 scikit-learn==0.21.1
 scipy==1.2.1
-seaborn==0.9.0
+seaborn==0.10.0
 SecretStorage==3.1.1
 Send2Trash==1.5.0
 simplegeneric==0.8.1
