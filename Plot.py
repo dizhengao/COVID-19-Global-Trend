@@ -208,18 +208,6 @@ def PlotTrend_XT_InA(url = 'JHU_Git', Top = 20, Start = 1, log = False, include 
     
     #--------------------------------------label and plot--------------------------------------
 
-    
-    if Hubei == False:
-        Df = Df[Df['Region'] != 'Hubei']
-    
-    if China == False:
-        C_label = ' hiden; '
-    else:
-        C_label = ' included; '
-    if Hubei == False:
-        H_label = ' hiden'
-    else:
-        H_label = ' included'
         
     if log == True:
         Df['Case'] = np.log(Df['Case'])
