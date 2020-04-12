@@ -10,6 +10,8 @@ from dash.dependencies import Input, Output
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
+
 url_confirm = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
 url_death = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
 
@@ -18,7 +20,7 @@ app.layout = html.Div([
     html.H1('Covid-19 Dashboard', 
             style={'textAlign': 'center'}),
     
-    html.Div(children='Write a description of the plots here...', 
+    html.Div(children='The plot shows the confirmed and death cases of COVID-19 in the top regions across the world. A bit of more information can be found on https://github.com/dizhengao/COVID-19-Global-Trend', 
          style={'textAlign': 'center'}),
     
     html.Div([
