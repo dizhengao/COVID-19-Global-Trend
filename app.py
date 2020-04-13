@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from Plot import PlotTrend_Con_InA, PlotTrend_XT_InA
+from Plot import PlotTrend_Con_InA, PlotTrend_XT_InA, PlotTrend_Death_Rate
 
 import dash
 import dash_core_components as dcc
