@@ -345,7 +345,7 @@ def PlotTrend_Death_Rate(url = 'JHU_Git', Top = 20, Start = 20, include = False,
     
     ylabel = 'Mortality rate'
 
-    Title =  'Mortality rates in the regions with top ' + str(Top) + ' confirmed cases (case/death, do not reflect the real death rate at each time point)'
+    Title =  'Mortality rates in the regions with top ' + str(Top) + ' confirmed cases (death/case, do not reflect the real death rate at each time point, for quick reference only)'
     
     fig = px.line(x = Df['Date'], y = Df['Case'], color = Df['Region'],title = Title, labels={'x':label, 'y':ylabel})
     
