@@ -31,6 +31,7 @@ app.layout = html.Div([
                 options=[
                     {'label': 'Global confirmed cases', 'value': 'con'},
                     {'label': 'Global death cases', 'value': 'death'},
+                    {'label': 'Death rate', 'value': 'rate'}
                 ],
                 value='con'   
             ),
@@ -109,9 +110,10 @@ def update_graph(cat,top,scale,start,chn,region):
     if cat == 'con':
         fig = PlotTrend_Con_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = china_sum)
         
-        
-    else:
+    elif cat == 'death':
         fig = PlotTrend_XT_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = china_sum)
+    else:
+        fig = PlotTrend_Death_Rate(url = 'JHU_Git', Top = int(top), Start = start, include = region, China_Sum = china_sum)
     
     return fig
 
