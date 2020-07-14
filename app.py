@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from Plot import PlotTrend_Con_InA, PlotTrend_XT_InA, PlotTrend_Death_Rate
+from Plot import PlotTrend_Con_InA, PlotTrend_XT_InA, PlotTrend_Death_Rate, PlotTrend_New
 
 import dash
 import dash_core_components as dcc
@@ -31,6 +31,7 @@ app.layout = html.Div([
                 options=[
                     {'label': 'Global confirmed cases', 'value': 'con'},
                     {'label': 'Global death cases', 'value': 'death'},
+                    {'label': 'New cases', 'value': 'new'},
                     {'label': 'Death rate', 'value': 'rate'}
                 ],
                 value='con'   
@@ -62,17 +63,6 @@ app.layout = html.Div([
                 value=100
             ),
 
-            html.Label('Cases in China'),
-            dcc.RadioItems(
-                id = 'chn',
-                options=[
-                    {'label': 'Use total cases in China', 'value': 'tot'},
-                    {'label': 'Include individual regions in China', 'value': 'ind'}
-                ],
-                value='tot'
-            ),
-
-
             html.Label('Any region to include particularly?'),
             dcc.Input(id='region', value='', type='text'),
         ],style={'width': '48%', 'float': 'right', 'display': 'inline-block'}
@@ -88,34 +78,31 @@ app.layout = html.Div([
      Input('top', 'value'),
      Input('scale', 'value'),
      Input('start', 'value'),
-     Input('chn', 'value'),
      Input('region', 'value')])
 
-def update_graph(cat,top,scale,start,chn,region):
-    
+def update_graph(cat,top,scale,start,region):
+
     if scale == 'log':
         Log = True
     else:
         Log = False
-    
-    if chn == 'tot':
-        china_sum = True
-    else:
-        china_sum = False
-    
+        
     if region:
         add_reg = []
         add_reg.append(str(region))
     
     if cat == 'con':
-        fig = PlotTrend_Con_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = china_sum)
+        fig = PlotTrend_Con_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = True)
         
     elif cat == 'death':
-        fig = PlotTrend_XT_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = china_sum)
+        fig = PlotTrend_XT_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = True)
+    elif cat == 'new':
+        fig = PlotTrend_New(url = 'JHU_Git', Top = int(top), Start = start, include = region, China_Sum = True)
     else:
-        fig = PlotTrend_Death_Rate(url = 'JHU_Git', Top = int(top), Start = start, include = region, China_Sum = china_sum)
-    
+        fig = PlotTrend_Death_Rate(url = 'JHU_Git', Top = int(top), Start = start, include = region, China_Sum = True)
+
     return fig
+
 
 if __name__ == '__main__':
     app.run_server(debug=True, use_reloader=False) 
