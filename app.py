@@ -25,17 +25,17 @@ app.layout = html.Div([
     
     html.Div([
         html.Div([
-            html.Label('Category'),
-            dcc.Dropdown(
-                id = 'cat',
-                options=[
-                    {'label': 'Global confirmed cases', 'value': 'con'},
-                    {'label': 'Global death cases', 'value': 'death'},
-                    {'label': 'New cases', 'value': 'new'},
-                    {'label': 'Death rate', 'value': 'rate'}
-                ],
-                value='con'   
-            ),
+            #html.Label('Category'),
+            #dcc.Dropdown(
+            #    id = 'cat',
+            #    options=[
+            #        {'label': 'Global confirmed cases', 'value': 'con'},
+            #        {'label': 'Global death cases', 'value': 'death'},
+            #        {'label': 'New cases', 'value': 'new'},
+            #        {'label': 'Death rate', 'value': 'rate'}
+            #    ],
+            #    value='con'   
+            #),
 
             html.Label('# of Top regions'),
             dcc.Input(
@@ -68,19 +68,31 @@ app.layout = html.Div([
         ],style={'width': '48%', 'float': 'right', 'display': 'inline-block'}
         )
     ]),
-    
-    dcc.Graph(id = 'fig')
+
+    html.Hr(),
+    dcc.Graph(id = 'fig_con'),
+
+    html.Hr(),
+    dcc.Graph(id = 'fig_new'),
+
+    html.Hr(),
+    dcc.Graph(id = 'fig_death'),
+
+    html.Hr(),
+    dcc.Graph(id = 'fig_death_rate')
+
 ])
 
 @app.callback(
-    Output('fig', 'figure'),
-    [Input('cat', 'value'),
-     Input('top', 'value'),
+    [Output('fig_con', 'figure'),
+    Output('fig_new','figure'),
+    Output('fig_death','figure'),
+    Output('fig_death_rate','figure')],
+    [Input('top', 'value'),
      Input('scale', 'value'),
      Input('start', 'value'),
      Input('region', 'value')])
-
-def update_graph(cat,top,scale,start,region):
+def update_graph(top,scale,start,region):
 
     if scale == 'log':
         Log = True
@@ -91,17 +103,16 @@ def update_graph(cat,top,scale,start,region):
         add_reg = []
         add_reg.append(str(region))
     
-    if cat == 'con':
-        fig = PlotTrend_Con_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = True)
-        
-    elif cat == 'death':
-        fig = PlotTrend_XT_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = True)
-    elif cat == 'new':
-        fig = PlotTrend_New(url = 'JHU_Git', Top = int(top), Start = start, include = region, China_Sum = True)
-    else:
-        fig = PlotTrend_Death_Rate(url = 'JHU_Git', Top = int(top), Start = start, include = region, China_Sum = True)
 
-    return fig
+    fig_con = PlotTrend_Con_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = True)
+        
+    fig_death = PlotTrend_XT_InA(url = 'JHU_Git', Top = int(top), Start = start, log = Log, include = region, China_Sum = True)
+
+    fig_new = PlotTrend_New(url = 'JHU_Git', Top = int(top), Start = start, include = region, China_Sum = True)
+    
+    fig_death_rate = PlotTrend_Death_Rate(url = 'JHU_Git', Top = int(top), Start = start, include = region, China_Sum = True)
+
+    return fig_con, fig_new, fig_death, fig_death_rate
 
 
 if __name__ == '__main__':
